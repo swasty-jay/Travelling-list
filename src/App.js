@@ -21,15 +21,27 @@ const Logo = () => {
 };
 const Form = () => {
   const [description, setDescription] = useState("");
-
   const [Quantity, setQuantity] = useState(1);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!description) return;
+
+    const newItem = {
+      description,
+      Quantity,
+      packed: false,
+      id: Date.now(),
+    };
+    console.log(newItem);
   };
+
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>what do you need for your😍 trip?</h3>
-      <select value={Quantity} onChange={(e) => setQuantity(e.target.value)}>
+      <select
+        value={Quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <option value={num} key={num}>
             {num}

@@ -33,6 +33,8 @@ const Form = () => {
       id: Date.now(),
     };
     console.log(newItem);
+    setDescription("");
+    setQuantity(1);
   };
 
   return (

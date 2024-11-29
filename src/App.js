@@ -1,32 +1,39 @@
 const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: false },
   { id: 2, description: "Socks", quantity: 12, packed: false },
+  { id: 2, description: "Phone", quantity: 1, packed: true },
 ];
 
-export default function App() {
+export default function app() {
   return (
     <div className="app">
       <Logo />
-      <Forms />
-      <ParkingList />
-      <Starts />
+      <Form />
+      <PackinfList />
+      <Stats />
     </div>
   );
 }
-
-function Logo() {
-  return <h1>🏝 Far Away 💼</h1>;
-}
-
-function Forms() {
+const Logo = () => {
+  return <h1>🌴Far Away💼</h1>;
+};
+const Form = () => {
   return (
-    <div className="add-form">
-      <h3>what do you need for your 😍 trip?</h3>
-    </div>
+    <form className="add-form">
+      <h3>what do you need for your😍 trip?</h3>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input type="text" placeholder="item..." />
+      <button>Add</button>
+    </form>
   );
-}
-
-function ParkingList() {
+};
+const PackinfList = () => {
   return (
     <div className="list">
       <ul>
@@ -36,17 +43,22 @@ function ParkingList() {
       </ul>
     </div>
   );
-}
-
+};
 function Item({ item }) {
-  return <li>{item.description}</li>;
-}
-
-function Starts() {
   return (
-    <footer className="stats">
-      {" "}
-      👜you have X items on your list and you already parked X(X%)
-    </footer>
+    <li>
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {" "}
+        {item.quantity} {item.description}
+      </span>
+      <button>❌</button>
+    </li>
   );
 }
+const Stats = () => {
+  return (
+    <footer className="stats ">
+      <em>💼 you have X items on your list, and you already packed X(%)</em>
+    </footer>
+  );
+};

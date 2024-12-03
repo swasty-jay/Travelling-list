@@ -26,6 +26,10 @@ export default function App() {
       )
     );
   };
+
+  function handleClearList() {
+    setItems([]);
+  }
   return (
     <div className="app">
       <Logo />
@@ -34,6 +38,7 @@ export default function App() {
         items={items}
         deleteItems={handleDeleteItems}
         toggleItem={handleToggleItem}
+        clearList={handleClearList}
       />
       <Stats items={items} />
     </div>
@@ -86,7 +91,7 @@ const Form = ({ handleAddItems }) => {
     </form>
   );
 };
-const PackingList = ({ items, deleteItems, toggleItem }) => {
+const PackingList = ({ items, deleteItems, toggleItem, clearList }) => {
   const [sortby, setsortby] = useState("input");
   /////////USIG DRIVED STATE////////SORTING FUNCTIONALITIES/////////
   let sortedItems;
@@ -119,6 +124,8 @@ const PackingList = ({ items, deleteItems, toggleItem }) => {
           <option value="description"> sort by description</option>
           <option value="packed"> sort by packed status</option>
         </select>
+
+        <button onChange={clearList}>clear list</button>
       </div>
     </div>
   );

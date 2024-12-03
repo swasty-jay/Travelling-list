@@ -33,7 +33,7 @@ export default function App() {
         deleteItems={handleDeleteItems}
         toggleItem={handleToggleItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -54,7 +54,6 @@ const Form = ({ handleAddItems }) => {
       packed: false,
       id: Date.now(),
     };
-    console.log(newItem);
 
     handleAddItems(newItem);
     setDescription("");
@@ -116,10 +115,17 @@ function Item({ item, deleteItems, toggleItem }) {
     </li>
   );
 }
-const Stats = () => {
+const Stats = ({ items }) => {
+  const numItems = items.length;
+  const packedItems = items.filter((item) => item.packed).length;
+
+  const percentage = Math.round((packedItems / numItems) * 100);
   return (
     <footer className="stats ">
-      <em>💼 you have X items on your list, and you already packed X(%)</em>
+      <em>
+        💼 you have {numItems} items on your list, and you already packed{" "}
+        {packedItems} ({percentage}%)
+      </em>
     </footer>
   );
 };

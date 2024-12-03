@@ -85,21 +85,30 @@ const Form = ({ handleAddItems }) => {
     </form>
   );
 };
-const PackingList = ({ items, deleteItems }) => {
+const PackingList = ({ items, deleteItems, toggleItem }) => {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item item={item} deleteItems={deleteItems} key={item.id} />
+          <Item
+            item={item}
+            deleteItems={deleteItems}
+            toggleItem={toggleItem}
+            key={item.id}
+          />
         ))}
       </ul>
     </div>
   );
 };
-function Item({ item, deleteItems }) {
+function Item({ item, deleteItems, toggleItem }) {
   return (
     <li>
-      <input type="checkbox" value={item.packed} onChange={() => {}} />
+      <input
+        type="checkbox"
+        value={item.packed}
+        onChange={() => toggleItem(item.id)}
+      />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.Quantity} {item.description}
       </span>

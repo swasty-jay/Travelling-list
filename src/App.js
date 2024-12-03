@@ -97,6 +97,14 @@ const PackingList = ({ items, deleteItems, toggleItem }) => {
           />
         ))}
       </ul>
+
+      <div className="actions">
+        <select>
+          <option value="input"> sort by input</option>
+          <option value="description"> sort by description</option>
+          <option value="packed"> sort by packed status</option>
+        </select>
+      </div>
     </div>
   );
 };
@@ -116,15 +124,24 @@ function Item({ item, deleteItems, toggleItem }) {
   );
 }
 const Stats = ({ items }) => {
-  const numItems = items.length;
-  const packedItems = items.filter((item) => item.packed).length;
+  if (!items.length)
+    return (
+      <p className="stats">
+        <em>Start adding some items to your list🚀</em>
+      </p>
+    );
 
-  const percentage = Math.round((packedItems / numItems) * 100);
+  const numItems = items.length;
+  const numpacked = items.filter((item) => item.packed).length;
+
+  const percentage = Math.round((numpacked / numItems) * 100);
   return (
     <footer className="stats ">
       <em>
-        💼 you have {numItems} items on your list, and you already packed{" "}
-        {packedItems} ({percentage}%)
+        {percentage === 100
+          ? " You got everything ready to go ✈"
+          : ` 💼 you have ${numItems} items on your list, and you already packed
+        ${numpacked} (${percentage}%)`}
       </em>
     </footer>
   );

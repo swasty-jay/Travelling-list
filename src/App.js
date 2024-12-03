@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const initialItems = [
-  { id: 1, description: "Passports", quantity: 2, packed: false },
-  { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 3, description: "Phone", quantity: 1, packed: true },
-];
+// const initialItems = [
+//   { id: 1, description: "Passports", quantity: 2, packed: false },
+//   { id: 2, description: "Socks", quantity: 12, packed: false },
+//   { id: 3, description: "Phone", quantity: 1, packed: true },
+// ];
 
 export default function App() {
   const [items, setItems] = useState([]);
@@ -12,11 +12,15 @@ export default function App() {
   const handleAddItems = (item) => {
     setItems((items) => [...items, item]);
   };
+
+  const handleDeleteItems = (id) => {
+    setItems((items) => items.filter((item) => item.id !== id));
+  };
   return (
     <div className="app">
       <Logo />
       <Form handleAddItems={handleAddItems} />
-      <PackingList items={items} />
+      <PackingList items={items} deleteItems={handleDeleteItems} />
       <Stats />
     </div>
   );
@@ -69,25 +73,25 @@ const Form = ({ handleAddItems }) => {
     </form>
   );
 };
-const PackingList = ({ items }) => {
+const PackingList = ({ items, deleteItems }) => {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item item={item} key={item.id} />
+          <Item item={item} deleteItems={deleteItems} key={item.id} />
         ))}
       </ul>
     </div>
   );
 };
-function Item({ item }) {
+function Item({ item, deleteItems }) {
   return (
     <li>
+      <input type="checkbox" value={item.packed} onChange={() => {}} />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        {" "}
-        {item.quantity} {item.description}
+        {item.Quantity} {item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => deleteItems(item.id)}>❌</button>
     </li>
   );
 }

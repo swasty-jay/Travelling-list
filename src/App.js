@@ -16,11 +16,23 @@ export default function App() {
   const handleDeleteItems = (id) => {
     setItems((items) => items.filter((item) => item.id !== id));
   };
+
+  const handleToggleItem = (id) => {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  };
   return (
     <div className="app">
       <Logo />
       <Form handleAddItems={handleAddItems} />
-      <PackingList items={items} deleteItems={handleDeleteItems} />
+      <PackingList
+        items={items}
+        deleteItems={handleDeleteItems}
+        toggleItem={handleToggleItem}
+      />
       <Stats />
     </div>
   );

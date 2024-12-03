@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Logo from "./Logo";
-import Form from "./Form";
-import PackingList from "./PackingList";
-import Stats from "./Stats";
+import Logo from "./component/Logo";
+import Form from "./component/Form";
+import PackingList from "./component/PackingList";
+import Stats from "./component/Stats";
 
 // const initialItems = [
 //   { id: 1, description: "Passports", quantity: 2, packed: false },
